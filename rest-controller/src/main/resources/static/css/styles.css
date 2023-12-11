@@ -1,0 +1,242 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: "Lato", sans-serif;
+    font-size: 16px;
+    background-color: #f0f0f0;
+    display: flex;
+    flex-direction: column;
+}
+
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background-color: lightgray;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.logo {
+    width: 350px;
+    height: 125px;
+    box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
+}
+
+.steps {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.step {
+    flex: 1;
+    margin: 25px;
+    text-align: center;
+    position: relative;
+    color: darkgray;
+}
+.circle {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 2px solid darkgray;
+    margin: 0 auto 5px;
+}
+.step.error .circle {
+    background-color: lightpink;
+    border-color: black;
+}
+.step.active .circle {
+    background-color: lightgreen;
+    border-color: black;
+}
+.step.active {
+    color: black;
+}
+
+.step.error {
+    color: black;
+}
+
+.buttons {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.button {
+    margin: 5px;
+}
+
+.page-container {
+    width: 1000px;
+    min-width: 500px;
+    margin: 150px auto 25px auto;
+}
+
+.text {
+    margin: auto;
+    padding: 10px 10px;
+    text-align: center;
+}
+
+.form-container {
+    padding: 10px;
+    margin: 10px;
+    box-shadow: rgba(149, 157, 165, 0.15) 0px 3px 6px 0px
+}
+
+ul.checkbox-tag {
+    list-style: none;
+    padding: 10px;
+}
+ul.checkbox-tag li{
+    display: inline;
+}
+ul.checkbox-tag li label{
+    display: inline-block;
+    background-color: lightgray;
+    border: 2px solid darkgray;
+    color: black;
+    border-radius: 25px;
+    margin: 3px 0px;
+}
+ul.checkbox-tag li label {
+    padding: 8px 12px;
+    cursor: pointer;
+}
+ul.checkbox-tag li label::before {
+    display: inline-block;
+    text-rendering: auto;
+    padding: 2px 6px 2px 2px;
+}
+ul.checkbox-tag li input[type="checkbox"]:checked + label {
+    border: 2px solid green;
+    background-color: lightgreen;
+    color: black;
+    transition: all .2s;
+}
+ul.checkbox-tag li input[type="checkbox"] {
+  position: absolute;
+  opacity: 0;
+}
+
+.question-number-container {
+    background-color: lightpink;
+    padding: 5px;
+    font-size: 17px;
+}
+
+.question-details-container {
+    display: flex;
+}
+
+.question-column {
+    flex: 1;
+    display: flex;
+    background-color: lightblue;
+    padding: 10px;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.details-column {
+    flex: 1;
+    display: flex;
+    background-color: lightgreen;
+    padding-left: 10px;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.options-container {
+    padding: 5px;
+    background-color: lightgrey;
+}
+
+.option {
+    display: flex;
+}
+
+.answer-container {
+    padding: 5px;
+    align-items: center;
+    background-color: lightyellow;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.italic {
+    font-style: italic;
+}
+
+
+.footer {
+    background-color: lightgray;
+    position: fixed;
+    bottom: 0;
+    text-align: center;
+    padding: 3px 0;
+    width: 100%;
+    font-size: 14px;
+    margin-top: 100px;
+}
+
+
+@media screen and (max-width: 600px) {
+    body {
+        flex-direction: column;
+    }
+
+    .page-container {
+        max-width: 100%;
+        margin-left: 0px;
+    }
+}
+
+h1 {
+    margin: auto;
+    padding: 10px 10px;
+    text-align: center;
+}
+
+button {
+    display: inline-block;
+    outline: none;
+    cursor: pointer;
+    font-size: 14px;
+    line-height: 1;
+    border-radius: 500px;
+    transition-property: background-color,border-color,color,box-shadow,filter;
+    transition-duration: .3s;
+    border: 1px solid transparent;
+    letter-spacing: 2px;
+    min-width: 160px;
+    text-transform: uppercase;
+    white-space: normal;
+    font-weight: 700;
+    text-align: center;
+    padding: 16px 14px 18px;
+    color: #616467;
+    box-shadow: inset 0 0 0 2px #616467;
+    background-color: transparent;
+    height: 48px;
+}
+
+button:hover{
+    color: #fff;
+    background-color: #616467;
+}
+
+button:disabled{
+    pointer-events: none;
+    cursor: not-allowed;
+    opacity: 0.20;
+}
+

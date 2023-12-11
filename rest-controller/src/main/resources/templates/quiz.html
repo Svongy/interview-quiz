@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Interview Quiz - Train</title>
+    <link th:href="@{/css/styles.css}" rel="stylesheet"/>
+</head>
+
+<body>
+
+    <div class="header">
+        <div>
+            <img class="logo" th:src="@{/images/logo.png}" alt="IQ-logo">
+        </div>
+
+        <div class="steps">
+            <div class="step">
+                <div class="circle"></div>
+                LOAD
+            </div>
+            <div class="step">
+                <div class="circle"></div>
+                CONFIGURE
+            </div>
+            <div class="step active">
+                <div class="circle"></div>
+                TRAIN
+            </div>
+        </div>
+
+        <div class="buttons">
+            <a th:href="@{/}">
+                <button class="button">Try Again</button>
+            </a>
+        </div>
+
+    </div>
+
+    <div class="page-container">
+        <h1>Test your skill</h1>
+
+        <div class="form-container" th:each="question, iterStat : ${questions}">
+            <div class="question-number-container">
+                <span class="bold">Question # </span>
+                <span th:text="${iterStat.index + 1}"></span>
+            </div>
+
+            <div class="question-details-container">
+                <div class="question-column">
+                    <p th:utext="${question.question}"></p>
+                </div>
+
+                <div class="details-column">
+                    <p>
+                        <span class="bold">Topic: </span>
+                        <span th:text="${question.topic}"></span>
+                    </p>
+
+                    <p>
+                        <span class="bold">Tags: </span>
+                        <span th:text="${#strings.arrayJoin(question.tags, ', ')}"></span>
+                    </p>
+
+                    <p>
+                        <span class="bold">Competency: </span>
+                        <span th:text="${question.competency}"></span>
+                    </p>
+                </div>
+            </div>
+
+            <div class="options-container" th:if="${#strings.equals(question.type, 'SINGLE')}">
+                <fieldset>
+                    <legend><span class="bold">Choose one</span></legend>
+                    <div th:if="${question.a != null}">
+                        <input type="radio" th:name="'question_' + ${iterStat.index}" th:value="${question.a}">
+                        <span th:text="${question.a}"></span>
+                    </div>
+                    <div th:if="${question.b != null}">
+                        <input type="radio" th:name="'question_' + ${iterStat.index}" th:value="${question.b}">
+                        <span th:text="${question.b}"></span>
+                    </div>
+                    <div th:if="${question.c != null}">
+                        <input type="radio" th:name="'question_' + ${iterStat.index}" th:value="${question.c}">
+                        <span th:text="${question.c}"></span>
+                    </div>
+                    <div th:if="${question.d != null}">
+                        <input type="radio" th:name="'question_' + ${iterStat.index}" th:value="${question.d}">
+                        <span th:text="${question.d}"></span>
+                    </div>
+                        <!-- <div class="options" th:each="option : ${question.options}">
+                            <input type="radio" th:name="'question_' + ${iterStat.index}" th:value="${option}">
+                            <span th:text="${option}"></span>
+                        </div> -->
+                    </fieldset>
+                </div>
+
+                <div class="options-container" th:if="${#strings.equals(question.type, 'MULTI')}">
+                    <fieldset>
+                        <legend><span class="bold">Choose multiple</span></legend>
+                        <div th:if="${question.a != null}">
+                            <input type="checkbox" th:name="'question_' + ${iterStat.index}" th:value="${question.a}">
+                            <span th:text="${question.a}"></span>
+                        </div>
+                        <div th:if="${question.b != null}">
+                            <input type="checkbox" th:name="'question_' + ${iterStat.index}" th:value="${question.b}">
+                            <span th:text="${question.b}"></span>
+                        </div>
+                        <div th:if="${question.c != null}">
+                            <input type="checkbox" th:name="'question_' + ${iterStat.index}" th:value="${question.c}">
+                            <span th:text="${question.c}"></span>
+                        </div>
+                        <div th:if="${question.d != null}">
+                            <input type="checkbox" th:name="'question_' + ${iterStat.index}" th:value="${question.d}">
+                            <span th:text="${question.d}"></span>
+                        </div>
+                        <!-- <div th:each="option : ${question.options}">
+                            <input type="checkbox" th:name="'question_' + ${iterStat.index}" th:value="${option}">
+                            <span th:text="${option}"></span>
+                        </div> -->
+                    </fieldset>
+                </div>
+
+                <div class="answer-container">
+                    <details>
+                        <summary><span class="bold">Answer</span></summary>
+                        <p th:utext="${question.answer}"></p>
+                    </details>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            &copy; 2023 Interview Quiz | by Vladyslav Tkachuk
+        </div>
+    </body>
+    </html>
+

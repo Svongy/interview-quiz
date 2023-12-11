@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Interview Quiz - Load</title>
+    <link th:href="@{/css/styles.css}" rel="stylesheet"/>
+</head>
+
+<body>
+
+    <div class="header">
+        <div>
+            <img class="logo" th:src="@{/images/logo.png}" alt="IQ-logo">
+        </div>
+
+        <div class="steps">
+            <div class="step active">
+                <div class="circle"></div>
+                LOAD
+            </div>
+            <div class="step">
+                <div class="circle"></div>
+                CONFIGURE
+            </div>
+            <div class="step">
+                <div class="circle"></div>
+                TRAIN
+            </div>
+        </div>
+
+        <div class="buttons">
+            <form class="button" action="/loadQuestions" method="post">
+                <button>Load Data</button>
+            </form>
+            <a class="button" th:href="@{/build}" th:style="${dataLoaded} ? '' : 'visibility: hidden;'">
+                <button >Build your quiz</button>
+            </a>
+        </div>
+    </div>
+
+    <div class="page-container">
+        <h1>Welcome to the Interview Quiz</h1>
+
+        <div>
+            <p>This web resource is designed specifically for individuals preparing for future technical interviews for Quality Assurance (QA) job roles including QA Manual, QA Automation, QA Lead, QA Manager, and related positions.</p>
+
+            <p>Kindly note that the code for this web resource is created by a QA Manager skilled in QA Automation rather than Software Development. While seeking potential enhancements, I appreciate and welcome any suggestions or improvements on GitHub.</p>
+
+            <p>Creating a quiz involves three simple steps:</p>
+
+            <ol>
+                <li>
+                    <span class="bold">LOAD </span> - involves loading the current dataset of questions and their details.
+                </li>
+                <li>
+                    <span class="bold">CONFIGURE </span> - entails selecting interesting Topics, Tags, and Competencies.
+                </li>
+                <li>
+                    <span class="bold">TRAIN </span> - directly generates a quiz based on available data and filters.
+                </li>
+            </ol>
+
+            <p>To proceed, click on <span class="bold">LOAD DATA</span> and then <span class="bold">BUILD YOUR QUIZ</span> at the top right corner.</p>
+        </div>
+
+    </div>
+
+    <div class="footer">
+        &copy; 2023 Interview Quiz | by Vladyslav Tkachuk
+    </div>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title th:text=${errorHeader}></title>
+    <link th:href="@{/css/styles.css}" rel="stylesheet"/>
+</head>
+
+<body>
+
+    <div class="header">
+        <div>
+            <img class="logo" th:src="@{/images/logo.png}" alt="IQ-logo">
+        </div>
+
+        <div class="steps">
+            <div class="step error">
+                <div class="circle"></div>
+                ERROR
+            </div>
+        </div>
+
+        <div class="buttons">
+            <a th:href="@{/}">
+                <button class="button">Try Again</button>
+            </a>
+        </div>
+
+    </div>
+
+    <div class="page-container">
+        <h1 th:text=${errorHeader}></h1>
+
+        <p class="text" th:text="${errorMessage}"></p>
+    </div>
+
+    <div class="footer">
+        &copy; 2023 Interview Quiz | by Vladyslav Tkachuk
+    </div>
+
+</body>
+</html>

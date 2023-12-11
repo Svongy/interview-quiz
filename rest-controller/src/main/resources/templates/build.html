@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Interview Quiz - Configure</title>
+    <link th:href="@{/css/styles.css}" rel="stylesheet"/>
+</head>
+
+<body>
+
+    <form class="page-container" th:action="@{/quiz}" method="get">
+
+        <div class="header">
+            <div>
+                <img class="logo" th:src="@{/images/logo.png}" alt="IQ-logo">
+            </div>
+
+            <div class="steps">
+                <div class="step">
+                    <div class="circle"></div>
+                    LOAD
+                </div>
+                <div class="step active">
+                    <div class="circle"></div>
+                    CONFIGURE
+                </div>
+                <div class="step">
+                    <div class="circle"></div>
+                    TRAIN
+                </div>
+            </div>
+
+            <div class="buttons">
+                <button class="button" type="submit">Generate Quiz</button>
+            </div>
+
+        </div>
+        <h1>Select Topics, Tags, and Competencies you want to train</h1>
+
+        <div class="form-container">
+            <h2>Topics</h2>
+            <ul class="checkbox-tag">
+                <li th:each="topic : ${topics}">
+                    <input type="checkbox" th:id="${'topic-' + topic}" th:name="'topics'" th:value="${topic}">
+                    <label th:for="${'topic-' + topic}" th:text="${topic}"></label>
+                </li>
+            </ul>
+        </div>
+
+        <div class="form-container">
+            <h2>Tags</h2>
+            <ul class="checkbox-tag">
+                <li th:each="tag : ${tags}">
+                    <input type="checkbox" th:id="${'tag-' + tag}" th:name="'tags'" th:value="${tag}">
+                    <label th:for="${'tag-' + tag}" th:text="${tag}"></label>
+                </li>
+            </ul>
+        </div>
+
+        <div class="form-container">
+            <h2>Competencies</h2>
+            <ul class="checkbox-tag">
+                <li th:each="competency : ${competencies}">
+                    <input type="checkbox" th:id="${'competency-' + competency}" th:name="'competencies'" th:value="${competency}">
+                    <label th:for="${'competency-' + competency}" th:text="${competency}"></label>
+                </li>
+            </ul>
+        </div>
+
+    </form>
+
+    <div class="footer">
+        &copy; 2023 Interview Quiz | by Vladyslav Tkachuk
+    </div>
+</form>
+
+</body>
+</html>
