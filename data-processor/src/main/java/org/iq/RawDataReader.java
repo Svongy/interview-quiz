@@ -6,6 +6,7 @@ import org.iq.utils.ConfigReader;
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 
 /*
 Class is responsible to getting Questions data from Google Sheets and save it locally to resources folder.
@@ -55,7 +56,7 @@ public class RawDataReader {
     }
 
     private static void saveData() throws IOException {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(RESULT_FILE_PATH))) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(RESULT_FILE_PATH, StandardCharsets.UTF_8))) {
             writer.append(GET_DATA_RESPONSE);
         }
     }

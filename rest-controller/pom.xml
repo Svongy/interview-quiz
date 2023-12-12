@@ -10,6 +10,7 @@
     </parent>
 
     <artifactId>rest-controller</artifactId>
+    <packaging>jar</packaging>
 
     <dependencies>
         <dependency>
@@ -30,5 +31,25 @@
         </dependency>
 
     </dependencies>
+
+    <build>
+        <finalName>InterviewQuiz</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <mainClass>org.iq.Main</mainClass>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>
