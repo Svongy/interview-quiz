@@ -3,7 +3,9 @@
 
 <head>
     <title>Interview Quiz - Train</title>
-    <link th:href="@{/css/styles.css}" rel="stylesheet"/>
+    <link th:href="@{/css/common/styles.css}" rel="stylesheet"/>
+    <link th:href="@{/css/quiz.css}" rel="stylesheet"/>
+    <script type="text/javascript" th:src="@{/js/common/actions.js}"></script>
 </head>
 
 <body>
@@ -24,7 +26,7 @@
             </div>
             <div class="step active">
                 <div class="circle"></div>
-                TRAIN
+                MASTER
             </div>
         </div>
 
@@ -37,9 +39,9 @@
     </div>
 
     <div class="page-container">
-        <h1>Test your skill</h1>
+        <h1>Enhance your mastery</h1>
 
-        <div class="form-container" th:each="question, iterStat : ${questions}">
+        <div th:class="'form-container ' + ${iterStat.index} + 1" th:each="question, iterStat : ${questions}">
             <div class="question-number-container">
                 <span class="bold">Question # </span>
                 <span th:text="${iterStat.index + 1}"></span>
@@ -73,65 +75,59 @@
                     <legend><span class="bold">Choose one</span></legend>
                     <div th:if="${question.a != null}">
                         <input type="radio" th:name="'question_' + ${iterStat.index}" th:value="${question.a}">
-                        <span th:text="${question.a}"></span>
+                        <span th:utext="${question.a}"></span>
                     </div>
                     <div th:if="${question.b != null}">
                         <input type="radio" th:name="'question_' + ${iterStat.index}" th:value="${question.b}">
-                        <span th:text="${question.b}"></span>
+                        <span th:utext="${question.b}"></span>
                     </div>
                     <div th:if="${question.c != null}">
                         <input type="radio" th:name="'question_' + ${iterStat.index}" th:value="${question.c}">
-                        <span th:text="${question.c}"></span>
+                        <span th:utext="${question.c}"></span>
                     </div>
                     <div th:if="${question.d != null}">
                         <input type="radio" th:name="'question_' + ${iterStat.index}" th:value="${question.d}">
-                        <span th:text="${question.d}"></span>
+                        <span th:utext="${question.d}"></span>
                     </div>
-                        <!-- <div class="options" th:each="option : ${question.options}">
-                            <input type="radio" th:name="'question_' + ${iterStat.index}" th:value="${option}">
-                            <span th:text="${option}"></span>
-                        </div> -->
-                    </fieldset>
-                </div>
+                </fieldset>
+            </div>
 
-                <div class="options-container" th:if="${#strings.equals(question.type, 'MULTI')}">
-                    <fieldset>
-                        <legend><span class="bold">Choose multiple</span></legend>
-                        <div th:if="${question.a != null}">
-                            <input type="checkbox" th:name="'question_' + ${iterStat.index}" th:value="${question.a}">
-                            <span th:text="${question.a}"></span>
-                        </div>
-                        <div th:if="${question.b != null}">
-                            <input type="checkbox" th:name="'question_' + ${iterStat.index}" th:value="${question.b}">
-                            <span th:text="${question.b}"></span>
-                        </div>
-                        <div th:if="${question.c != null}">
-                            <input type="checkbox" th:name="'question_' + ${iterStat.index}" th:value="${question.c}">
-                            <span th:text="${question.c}"></span>
-                        </div>
-                        <div th:if="${question.d != null}">
-                            <input type="checkbox" th:name="'question_' + ${iterStat.index}" th:value="${question.d}">
-                            <span th:text="${question.d}"></span>
-                        </div>
-                        <!-- <div th:each="option : ${question.options}">
-                            <input type="checkbox" th:name="'question_' + ${iterStat.index}" th:value="${option}">
-                            <span th:text="${option}"></span>
-                        </div> -->
-                    </fieldset>
-                </div>
+            <div class="options-container" th:if="${#strings.equals(question.type, 'MULTI')}">
+                <fieldset>
+                    <legend><span class="bold">Choose multiple</span></legend>
+                    <div th:if="${question.a != null}">
+                        <input type="checkbox" th:name="'question_' + ${iterStat.index}" th:value="${question.a}">
+                        <span th:utext="${question.a}"></span>
+                    </div>
+                    <div th:if="${question.b != null}">
+                        <input type="checkbox" th:name="'question_' + ${iterStat.index}" th:value="${question.b}">
+                        <span th:utext="${question.b}"></span>
+                    </div>
+                    <div th:if="${question.c != null}">
+                        <input type="checkbox" th:name="'question_' + ${iterStat.index}" th:value="${question.c}">
+                        <span th:utext="${question.c}"></span>
+                    </div>
+                    <div th:if="${question.d != null}">
+                        <input type="checkbox" th:name="'question_' + ${iterStat.index}" th:value="${question.d}">
+                        <span th:utext="${question.d}"></span>
+                    </div>
+                </fieldset>
+            </div>
 
-                <div class="answer-container">
-                    <details>
-                        <summary><span class="bold">Answer</span></summary>
-                        <p th:utext="${question.answer}"></p>
-                    </details>
-                </div>
+            <div class="answer-container">
+                <details>
+                    <summary onclick="checkAnswers(this)">
+                        <span class="bold">Answer</span>
+                    </summary>
+                    <p th:utext="${question.answer}"></p>
+                </details>
             </div>
         </div>
+    </div>
 
-        <div class="footer">
-            &copy; 2023 Interview Quiz | by Vladyslav Tkachuk
-        </div>
-    </body>
-    </html>
+    <div class="footer">
+        &copy; 2023 Interview Quiz | by Vladyslav Tkachuk
+    </div>
+</body>
+</html>
 

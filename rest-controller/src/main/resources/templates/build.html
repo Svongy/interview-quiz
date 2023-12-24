@@ -3,7 +3,9 @@
 
 <head>
     <title>Interview Quiz - Configure</title>
-    <link th:href="@{/css/styles.css}" rel="stylesheet"/>
+    <link th:href="@{/css/common/styles.css}" rel="stylesheet"/>
+    <link th:href="@{/css/build.css}" rel="stylesheet"/>
+    <script type="text/javascript" th:src="@{/js/common/actions.js}"></script>
 </head>
 
 <body>
@@ -26,7 +28,7 @@
                 </div>
                 <div class="step">
                     <div class="circle"></div>
-                    TRAIN
+                    MASTER
                 </div>
             </div>
 
@@ -35,10 +37,14 @@
             </div>
 
         </div>
-        <h1>Select Topics, Tags, and Competencies you want to train</h1>
+        <h1>Select Topics, Tags, and Competencies you want to master</h1>
 
         <div class="form-container">
-            <h2>Topics</h2>
+            <div class="form-header">
+                <input type="checkbox" id="topics-header" th:onclick="checkUncheckAll(this, 'topics')">
+                <label for="topics-header">Topics</label>
+            </div>
+
             <ul class="checkbox-tag">
                 <li th:each="topic : ${topics}">
                     <input type="checkbox" th:id="${'topic-' + topic}" th:name="'topics'" th:value="${topic}">
@@ -48,7 +54,11 @@
         </div>
 
         <div class="form-container">
-            <h2>Tags</h2>
+            <div class="form-header">
+                <input type="checkbox" id="tags-header" th:onclick="checkUncheckAll(this, 'tags')">
+                <label for="tags-header">Tags</label>
+            </div>
+
             <ul class="checkbox-tag">
                 <li th:each="tag : ${tags}">
                     <input type="checkbox" th:id="${'tag-' + tag}" th:name="'tags'" th:value="${tag}">
@@ -58,13 +68,29 @@
         </div>
 
         <div class="form-container">
-            <h2>Competencies</h2>
+            <div class="form-header">
+                <input type="checkbox" id="competencies-header" th:onclick="checkUncheckAll(this, 'competencies')">
+                <label for="competencies-header">Competencies</label>
+            </div>
+
             <ul class="checkbox-tag">
                 <li th:each="competency : ${competencies}">
                     <input type="checkbox" th:id="${'competency-' + competency}" th:name="'competencies'" th:value="${competency}">
                     <label th:for="${'competency-' + competency}" th:text="${competency}"></label>
                 </li>
             </ul>
+        </div>
+
+        <div class="form-container">
+            <span class="limit-label bold">Limit questions to</span>
+
+            <div class="radio-inputs">
+                <label class="radio" th:each="limit : ${limits}">
+                    <input type="radio" th:id="${'limit-' + limit}" th:name="'limit'" th:value="${limit}"
+                    th:checked="${limit == 'ALL'}">
+                    <span class="name" th:for="${'limit-' + limit}" th:text="${limit}"></span>
+                </label>
+            </div>
         </div>
 
     </form>

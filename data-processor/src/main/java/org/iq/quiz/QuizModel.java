@@ -5,6 +5,7 @@ import lombok.extern.java.Log;
 import org.iq.DataParser;
 import org.iq.Question;
 import org.iq.RawDataReader;
+import org.iq.enums.Competency;
 import org.iq.enums.QuestionType;
 
 import java.util.ArrayList;
@@ -17,6 +18,7 @@ import java.util.stream.Collectors;
 public class QuizModel {
     private List<Question> questions;
     private boolean isDataLoaded = false;
+    private final String[] questionsLimit = {"ALL", "1", "5", "10", "25"};
 
     public void loadData() {
         RawDataReader.getQuestionsDataSet();
@@ -27,8 +29,27 @@ public class QuizModel {
         this.isDataLoaded = true;
     }
 
-    public List<Question> generateQuiz() {
-        return generateQuiz(null, null, null);
+    public List<Question> generateQuiz(List<String> topics,
+                                       List<String> tags,
+                                       List<String> competencies,
+                                       String limit) {
+        List<Question> topicsFiltered = filterByTopic(topics);
+        List<Question> tagsFiltered = filterByTags(tags, topicsFiltered);
+        List<Question> competencyFiltered = filterByCompetency(competencies, tagsFiltered);
+
+        Collections.shuffle(competencyFiltered);
+
+        List<Question> limitedQuestions = limitQuestions(limit, competencyFiltered);
+
+        return limitedQuestions;
+    }
+
+    private List<Question> limitQuestions(String limit, List<Question> questions) {
+        if (!limit.equals("ALL")) {
+            return questions.stream().limit(Integer.parseInt(limit)).toList();
+        }
+
+        return questions;
     }
 
     public List<Question> getQuestionsOfSpecificType(List<Question> questions, QuestionType questionType) {
@@ -54,7 +75,7 @@ public class QuizModel {
                 .toList();
     }
 
-    public List<String> getDistinctCompetencies() {
+    public List<Competency> getDistinctCompetencies() {
         return questions.stream()
                 .map(Question::getCompetency)
                 .distinct()
@@ -62,22 +83,12 @@ public class QuizModel {
                 .toList();
     }
 
-    public List<Question> generateQuiz(List<String> topics , List<String> tags, List<String> competencies) {
-        List<Question> topicsFiltered = filterByTopic(topics);
-        List<Question> tagsFiltered = filterByTags(tags, topicsFiltered);
-        List<Question> competencyFiltered = filterByCompetency(competencies, tagsFiltered);
-
-        Collections.shuffle(competencyFiltered);
-
-        return competencyFiltered;
-    }
-
     private List<Question> filterByCompetency(List<String> competencies, List<Question> tagsFiltered) {
         List<Question> competencyFiltered = new ArrayList<>();
         if (competencies != null) {
             for (String competency : competencies) {
                 competencyFiltered.addAll(tagsFiltered.stream()
-                        .filter(question -> question.getCompetency().equals(competency))
+                        .filter(question -> question.getCompetency().name().equals(competency))
                         .toList());
             }
         } else {

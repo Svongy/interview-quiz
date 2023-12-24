@@ -38,6 +38,7 @@ public class WebController {
             model.addAttribute("topics", quizModel.getDistinctTopics());
             model.addAttribute("tags", quizModel.getDistinctTags());
             model.addAttribute("competencies", quizModel.getDistinctCompetencies());
+            model.addAttribute("limits", quizModel.getQuestionsLimit());
             return "build";
         }
 
@@ -47,6 +48,7 @@ public class WebController {
     public String quizPage(@RequestParam(value = "topics", required = false) List<String> topics,
                            @RequestParam(value = "tags", required = false) List<String> tags,
                            @RequestParam(value = "competencies", required = false) List<String> competencies,
+                           @RequestParam(value = "limit", required = false) String limit,
                            Model model) {
         if (!quizModel.isDataLoaded()) {
             model.addAttribute("errorHeader", "There is no loaded quiz data");
@@ -55,7 +57,7 @@ public class WebController {
             return "error";
         }
 
-        List<Question> filteredQuestions = quizModel.generateQuiz(topics, tags, competencies);
+        List<Question> filteredQuestions = quizModel.generateQuiz(topics, tags, competencies, limit);
 
         if (filteredQuestions.isEmpty()) {
             model.addAttribute("errorHeader", "No questions found");

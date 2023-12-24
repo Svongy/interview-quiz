@@ -1,0 +1,116 @@
+.form-header input[type="checkbox"] {
+    display: none;
+    visibility: hidden;
+}
+
+.form-header label {
+    position: relative;
+    padding-left: 40px;
+    padding-right: 1em;
+    line-height: 2;
+    cursor: pointer;
+    color: black;
+    font-weight: bold;
+    font-size: 20px;
+    display: inline-flex;
+}
+
+.form-header label:before {
+    box-sizing: border-box;
+    content: " ";
+    position: absolute;
+    top: 0.3em;
+    left: 0;
+    width: 1.4em;
+    height: 1.4em;
+    border: 2px solid darkgray;
+    border-radius: 25px;
+    z-index: -1;
+}
+
+.form-header input[type=checkbox]:checked + label {
+    padding-left: 1em;
+}
+.form-header input[type=checkbox]:checked + label:before {
+    top: 0;
+    width: 100%;
+    height: 2em;
+    background: lightgreen;
+    border-color: green;
+}
+.form-header label,
+.form-header label::before {
+    transition: 0.25s all ease;
+}
+
+ul.checkbox-tag {
+    list-style: none;
+    padding: 10px;
+}
+ul.checkbox-tag li{
+    display: inline;
+}
+.checkbox-tag label{
+    display: inline-block;
+    background-color: lightgray;
+    border: 2px solid darkgray;
+    color: black;
+    border-radius: 25px;
+    margin: 3px 0px;
+}
+.checkbox-tag label {
+    padding: 8px 12px;
+    cursor: pointer;
+}
+.checkbox-tag label::before {
+    display: inline-block;
+    text-rendering: auto;
+    padding: 2px 6px 2px 2px;
+}
+.checkbox-tag input[type="checkbox"]:checked + label {
+    border: 2px solid green;
+    background-color: lightgreen;
+    color: black;
+    transition: all .2s;
+}
+.checkbox-tag input[type="checkbox"] {
+    position: absolute;
+    opacity: 0;
+}
+
+.radio-inputs {
+    margin-top: 26px;
+    display: flex;
+    box-sizing: border-box;
+    border-radius: 0.5rem;
+    box-shadow: 0 0 0px 2px rgba(0, 0, 0, 0.1);
+}
+
+.radio-inputs .radio {
+    flex: 1 1 auto;
+    text-align: center;
+}
+
+.radio-inputs .radio input {
+    display: none;
+}
+
+.radio-inputs .radio .name {
+    display: flex;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.5rem;
+    border: none;
+    padding: .5rem 0;
+    transition: all .15s ease-in-out;
+}
+
+.radio-inputs .radio input:checked + .name {
+    background-color: lightgreen;
+    font-weight: bold;
+}
+
+.limit-label {
+    font-size: 20px;
+}

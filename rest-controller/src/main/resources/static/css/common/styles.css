@@ -1,3 +1,8 @@
+:root {
+    --light-gray: lightgray;
+    --dark-gray: darkgray;
+}
+
 body {
     margin: 0;
     padding: 0;
@@ -17,14 +22,14 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px;
     background-color: lightgray;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .logo {
     width: 350px;
-    height: 125px;
+    height: 75px;
+    margin: 10px;
     box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
 }
 
@@ -75,97 +80,13 @@ body {
 .page-container {
     width: 1000px;
     min-width: 500px;
-    margin: 150px auto 25px auto;
-}
-
-.text {
-    margin: auto;
-    padding: 10px 10px;
-    text-align: center;
+    margin: 100px auto 25px auto;
 }
 
 .form-container {
     padding: 10px;
     margin: 10px;
-    box-shadow: rgba(149, 157, 165, 0.15) 0px 3px 6px 0px
-}
-
-ul.checkbox-tag {
-    list-style: none;
-    padding: 10px;
-}
-ul.checkbox-tag li{
-    display: inline;
-}
-ul.checkbox-tag li label{
-    display: inline-block;
-    background-color: lightgray;
-    border: 2px solid darkgray;
-    color: black;
-    border-radius: 25px;
-    margin: 3px 0px;
-}
-ul.checkbox-tag li label {
-    padding: 8px 12px;
-    cursor: pointer;
-}
-ul.checkbox-tag li label::before {
-    display: inline-block;
-    text-rendering: auto;
-    padding: 2px 6px 2px 2px;
-}
-ul.checkbox-tag li input[type="checkbox"]:checked + label {
-    border: 2px solid green;
-    background-color: lightgreen;
-    color: black;
-    transition: all .2s;
-}
-ul.checkbox-tag li input[type="checkbox"] {
-  position: absolute;
-  opacity: 0;
-}
-
-.question-number-container {
-    background-color: lightpink;
-    padding: 5px;
-    font-size: 17px;
-}
-
-.question-details-container {
-    display: flex;
-}
-
-.question-column {
-    flex: 1;
-    display: flex;
-    background-color: lightblue;
-    padding: 10px;
-    justify-content: center;
-    flex-direction: column;
-}
-
-.details-column {
-    flex: 1;
-    display: flex;
-    background-color: lightgreen;
-    padding-left: 10px;
-    justify-content: center;
-    flex-direction: column;
-}
-
-.options-container {
-    padding: 5px;
-    background-color: lightgrey;
-}
-
-.option {
-    display: flex;
-}
-
-.answer-container {
-    padding: 5px;
-    align-items: center;
-    background-color: lightyellow;
+    box-shadow: rgba(149, 157, 165, 0.15) 0px 3px 6px 0px;
 }
 
 .bold {
@@ -175,7 +96,6 @@ ul.checkbox-tag li input[type="checkbox"] {
 .italic {
     font-style: italic;
 }
-
 
 .footer {
     background-color: lightgray;
@@ -187,7 +107,6 @@ ul.checkbox-tag li input[type="checkbox"] {
     font-size: 14px;
     margin-top: 100px;
 }
-
 
 @media screen and (max-width: 600px) {
     body {
@@ -204,6 +123,10 @@ h1 {
     margin: auto;
     padding: 10px 10px;
     text-align: center;
+}
+
+input {
+    vertical-align: middle; 
 }
 
 button {
