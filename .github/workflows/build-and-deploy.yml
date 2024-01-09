@@ -34,7 +34,7 @@ jobs:
         push: true
         tags: |
           svongy/interview-quiz:latest
-          svongy/interview-quiz:${{ env.CURR_VERSION }}
+          svongy/interview-quiz:${{ vars.CURR_VERSION }}
       env:
         DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
         DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
