@@ -24,16 +24,13 @@ public class WebController {
     public String loadData() {
         quizModel.loadData();
         quizModel.generateQuestionsList();
-        return "redirect:/";
+        return "redirect:build";
     }
 
     @GetMapping("/build")
     public String build(Model model) {
         if (!quizModel.isDataLoaded()) {
-            model.addAttribute("errorHeader", "There is no loaded quiz data");
-            model.addAttribute("errorMessage",
-                    "Please load the data first to proceed to the next steps.");
-            return "error";
+            return "index";
         } else {
             model.addAttribute("topics", quizModel.getDistinctTopics());
             model.addAttribute("tags", quizModel.getDistinctTags());
@@ -41,7 +38,6 @@ public class WebController {
             model.addAttribute("limits", quizModel.getQuestionsLimit());
             return "build";
         }
-
     }
 
     @GetMapping("/quiz")
@@ -51,10 +47,7 @@ public class WebController {
                            @RequestParam(value = "limit", required = false) String limit,
                            Model model) {
         if (!quizModel.isDataLoaded()) {
-            model.addAttribute("errorHeader", "There is no loaded quiz data");
-            model.addAttribute("errorMessage",
-                    "Please load the data first to proceed to the next steps.");
-            return "error";
+            return "index";
         }
 
         List<Question> filteredQuestions = quizModel.generateQuiz(topics, tags, competencies, limit);

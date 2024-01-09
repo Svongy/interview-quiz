@@ -7,7 +7,7 @@ function checkUncheckAll(source, checkboxName) {
 
 function checkAnswers(source) {
     const parent = source.closest(`.form-container`);
-    const answerText = parent.querySelector(`details p`).textContent.toLowerCase();
+    const answerText = parent.querySelector(`details div`).textContent.toLowerCase();
     const options = parent.querySelectorAll(`.options-container input`);
     const answerParts = answerText.split(';').map(part => part.trim());
     const details = parent.querySelector('details');

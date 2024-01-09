@@ -6,9 +6,13 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import lombok.extern.java.Log;
 import org.iq.enums.Competency;
 import org.iq.enums.QuestionType;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -26,23 +30,24 @@ Your csv should have at least following headers:
 ** answer - contains plain text for TEXT questions or letters a); b); c); d) (separated by semicolons) for SINGLE or MULTI.
 */
 
+@Log
 @Getter
 @Setter
+@ToString
 @NoArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
-@ToString
 public class Question {
     private QuestionType type = QuestionType.TEXT;
     private String question;
     private String topic = "N/A - ERROR IN DATASET";
     private List<String> tags = new ArrayList<>();
     private Competency competency = Competency.Junior;
-    // private List<String> options = new ArrayList<>();
     private String a;
     private String b;
     private String c;
     private String d;
     private String answer;
+    private LocalDate date;
 
     @JsonIgnore
     private static final Map<String, String> replacementList = new HashMap<>() {{
@@ -101,6 +106,13 @@ public class Question {
         }
     }
 
+    public void setDate(String date) {
+        if (date != null) {
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            this.date = LocalDate.parse(date, dtf);
+        }
+    }
+
     private String setHtmlMarkup(String text) {
         String result = text;
 
@@ -109,5 +121,17 @@ public class Question {
         }
 
         return result;
+    }
+
+    public boolean isNew() {
+        if (this.date != null) {
+            LocalDate currentDate = LocalDate.now();
+            LocalDate questionDate = this.date;
+
+            long daysBetween = ChronoUnit.DAYS.between(questionDate, currentDate);
+
+            return daysBetween <= 30;
+        }
+        return false;
     }
 }

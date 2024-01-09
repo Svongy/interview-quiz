@@ -11,14 +11,14 @@
 <body>
 
     <div class="header">
-        <div>
+        <a href="/">
             <img class="logo" th:src="@{/images/logo.png}" alt="IQ-logo">
-        </div>
+        </a>
 
         <div class="steps">
             <div class="step active">
                 <div class="circle"></div>
-                LOAD
+                LEARN
             </div>
             <div class="step">
                 <div class="circle"></div>
@@ -32,11 +32,8 @@
 
         <div class="buttons">
             <form class="button" action="/loadQuestions" method="post">
-                <button>Load Data</button>
+                <button>Build your quiz</button>
             </form>
-            <a class="button" th:href="@{/build}" th:style="${dataLoaded} ? '' : 'visibility: hidden;'">
-                <button >Build your quiz</button>
-            </a>
         </div>
     </div>
 
@@ -53,23 +50,23 @@
 
             <ol>
                 <li>
-                    <span class="bold">LOAD </span> - involves loading the current dataset of questions and their details.
+                    <span class="bold">LEARN</span> - take some time to learn about the service to understand its purpose and functionalities.
                 </li>
                 <li>
-                    <span class="bold">CONFIGURE </span> - entails selecting interesting Topics, Tags, and Competencies.
+                    <span class="bold">CONFIGURE</span> - entails selecting interesting Topics, Tags, and Competencies.
                 </li>
                 <li>
-                    <span class="bold">MASTER </span> - directly generates a quiz based on available data and filters.
+                    <span class="bold">MASTER</span> - directly generates a quiz based on available data and filters.
                 </li>
             </ol>
 
-            <p>To proceed, click on <span class="bold">LOAD DATA</span> and then <span class="bold">BUILD YOUR QUIZ</span> at the top right corner.</p>
+            <p>To proceed, click on <span class="bold">BUILD YOUR QUIZ</span> at the top right corner.</p>
         </div>
 
     </div>
 
     <div class="footer">
-        &copy; 2023 Interview Quiz | by Vladyslav Tkachuk
+        &copy; 2024 Interview Quiz | by Vladyslav Tkachuk
     </div>
 </body>
 </html>

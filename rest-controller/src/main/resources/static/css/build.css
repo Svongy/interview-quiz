@@ -1,3 +1,18 @@
+:root {
+    --tags-header-border: var(--color-4);
+    --tags-header-selected-bg: var(--light-green);
+    --tags-header-selected-border: var(--green);
+
+    --tags-bg: var(--light-gray);
+    --tags-border: var(--color-4);
+    --tags-selected-bg: var(--light-green);
+    --tags-selected-border: var(--green);
+}
+
+.form-header {
+    padding-left: 5px;
+}
+
 .form-header input[type="checkbox"] {
     display: none;
     visibility: hidden;
@@ -23,7 +38,7 @@
     left: 0;
     width: 1.4em;
     height: 1.4em;
-    border: 2px solid darkgray;
+    border: 1px solid var(--tags-header-border);
     border-radius: 25px;
     z-index: -1;
 }
@@ -35,8 +50,8 @@
     top: 0;
     width: 100%;
     height: 2em;
-    background: lightgreen;
-    border-color: green;
+    background: var(--tags-header-selected-bg);
+    border-color: var(--tags-header-selected-border);
 }
 .form-header label,
 .form-header label::before {
@@ -45,15 +60,16 @@
 
 ul.checkbox-tag {
     list-style: none;
-    padding: 10px;
+    padding: 5px;
+    margin: 0 auto;
 }
 ul.checkbox-tag li{
     display: inline;
 }
 .checkbox-tag label{
     display: inline-block;
-    background-color: lightgray;
-    border: 2px solid darkgray;
+    background-color: var(--tags-bg);
+    border: 1px solid var(--tags-border);
     color: black;
     border-radius: 25px;
     margin: 3px 0px;
@@ -68,8 +84,8 @@ ul.checkbox-tag li{
     padding: 2px 6px 2px 2px;
 }
 .checkbox-tag input[type="checkbox"]:checked + label {
-    border: 2px solid green;
-    background-color: lightgreen;
+    border: 1px solid var(--tags-selected-border);
+    background-color: var(--tags-selected-bg);
     color: black;
     transition: all .2s;
 }
@@ -79,11 +95,11 @@ ul.checkbox-tag li{
 }
 
 .radio-inputs {
-    margin-top: 26px;
+    margin: 15px 5px 5px;
     display: flex;
     box-sizing: border-box;
     border-radius: 0.5rem;
-    box-shadow: 0 0 0px 2px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 0px 2px rgba(70, 109, 127, 0.3);
 }
 
 .radio-inputs .radio {
@@ -102,15 +118,16 @@ ul.checkbox-tag li{
     justify-content: center;
     border-radius: 0.5rem;
     border: none;
-    padding: .5rem 0;
+    padding: .4rem 0;
     transition: all .15s ease-in-out;
 }
 
 .radio-inputs .radio input:checked + .name {
-    background-color: lightgreen;
+    background-color: var(--tags-selected-bg);
     font-weight: bold;
 }
 
 .limit-label {
     font-size: 20px;
+    padding-left: 5px;
 }
