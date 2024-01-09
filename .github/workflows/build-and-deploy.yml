@@ -33,7 +33,7 @@ jobs:
         file: ./Dockerfile
         push: true
         tags: |
-          svongy/interview-quiz:latest,
+          svongy/interview-quiz:latest
           svongy/interview-quiz:${{ env.CURR_VERSION }}
       env:
         DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
