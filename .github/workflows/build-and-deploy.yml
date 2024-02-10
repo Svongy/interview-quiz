@@ -22,13 +22,10 @@ jobs:
         distribution: 'temurin'
         cache: maven
 
-    # Build the project, zip .jar file
+    # Build the project
 
     - name: Build with Maven
       run: mvn clean --batch-mode package
-
-    - name: Zip Jar Artifact
-      run: zip -r InterviewQuiz.zip rest-controller/target/*.jar
 
     # Create GitHub release, upload assets
 
@@ -44,17 +41,6 @@ jobs:
           ${{ vars.WHATS_NEW }}
         draft: false
         prerelease: false
-
-    - name: Upload ZIP Release Asset
-      id: upload-release-asset
-      uses: actions/upload-release-asset@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: rest-controller/target/InterviewQuiz.zip
-        asset_name: InterviewQuiz.zip
-        asset_content_type: application/zip
 
     - name: Upload JAR Release Asset
       id: upload-release-asset
