@@ -47,14 +47,14 @@ Select the option that suits you best and follow the steps below:
 ### 3. Use docker
 1. Install [Docker](https://www.docker.com/) and create an account if you haven't already
 2. Using your Command-line interface (CLI) execute: `docker pull svongy/interview-quiz:latest` to download the Docker image from Docker Hub to your local machine
-3. In the same CLI execute: `docker run -d -p 8080:8080 svongy/interview-quiz:latest` to start the container in detached mode and map port 8080 of the container to port 8080 on your local machine
+3. In the same CLI execute: `docker run -d -p 8080:8080 --name interview-quiz svongy/interview-quiz:latest` to start the container in detached mode and map port 8080 of the container to port 8080 on your local machine
 4. Open your browser and navigate to: `http://localhost:8080`
 5. Follow the instructions in your browser and enjoy an enriching learning experience!
 
 ## Nearest plans
 - Expand the size of the questions bank.
-- Introduce service containerization to streamline service launch and enable Docker support.
-- Redesign the webpage for a more sophisticated appearance.
+- Create a form where users can share feedback, report bugs, or request improvements.
+- Introduce a feature that allows users to vote for questions they've encountered during an interview, enabling sorting based on popularity.
 
 ## Service description
 Please review the following details before commencing work with service.

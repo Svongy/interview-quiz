@@ -10,7 +10,7 @@
 
 <body>
 
-    <form class="page-container" th:action="@{/quiz}" method="get">
+    <form class="page-container" th:action="@{/generateQuiz}" method="get">
 
         <div class="header">
             <a href="/">
@@ -32,8 +32,8 @@
                 </div>
             </div>
 
-            <div class="buttons">
-                <button class="button" type="submit">Generate Quiz</button>
+            <div class="header-buttons">
+                <button type="submit">Generate Quiz</button>
             </div>
 
         </div>
@@ -43,6 +43,9 @@
             <div class="form-header">
                 <input type="checkbox" id="topics-header" th:onclick="checkUncheckAll(this, 'topics')">
                 <label for="topics-header">Topics</label>
+                <div class="input-search">
+                    <input type="text" id="topics" placeholder="Search . . ." oninput="filterQuestionAttribures(this)" onblur="clearQuestionAttributesFilter(this)">
+                </div>
             </div>
 
             <ul class="checkbox-tag">
@@ -57,6 +60,9 @@
             <div class="form-header">
                 <input type="checkbox" id="tags-header" th:onclick="checkUncheckAll(this, 'tags')">
                 <label for="tags-header">Tags</label>
+                <div class="input-search">
+                    <input type="text" id="tags" placeholder="Search . . ." oninput="filterQuestionAttribures(this)" onblur="clearQuestionAttributesFilter(this)">
+                </div>
             </div>
 
             <ul class="checkbox-tag">
@@ -71,6 +77,9 @@
             <div class="form-header">
                 <input type="checkbox" id="competencies-header" th:onclick="checkUncheckAll(this, 'competencies')">
                 <label for="competencies-header">Competencies</label>
+                <div class="input-search">
+                    <input type="text" id="competencies" placeholder="Search . . ." oninput="filterQuestionAttribures(this)" onblur="clearQuestionAttributesFilter(this)">
+                </div>
             </div>
 
             <ul class="checkbox-tag">
@@ -80,19 +89,6 @@
                 </li>
             </ul>
         </div>
-
-        <div class="form-container">
-            <span class="limit-label bold">Limit questions to</span>
-
-            <div class="radio-inputs">
-                <label class="radio" th:each="limit : ${limits}">
-                    <input type="radio" th:id="${'limit-' + limit}" th:name="'limit'" th:value="${limit}"
-                    th:checked="${limit == 'ALL'}">
-                    <span class="name" th:for="${'limit-' + limit}" th:text="${limit}"></span>
-                </label>
-            </div>
-        </div>
-
     </form>
 
     <div class="footer">

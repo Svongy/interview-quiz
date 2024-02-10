@@ -9,6 +9,8 @@ jobs:
 
     runs-on: ubuntu-latest
 
+    # Pre-configure and environment setup
+
     steps:
     - name: Code checkout
       uses: actions/checkout@v4
@@ -20,8 +22,52 @@ jobs:
         distribution: 'temurin'
         cache: maven
 
+    # Build the project, zip .jar file
+
     - name: Build with Maven
       run: mvn clean --batch-mode package
+
+    - name: Zip Jar Artifact
+      run: zip -r InterviewQuiz.zip rest-controller/target/*.jar
+
+    # Create GitHub release, upload assets
+
+    - name: Create Release
+      id: create_release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: ${{ vars.CURR_VERSION }}
+        release_name: ${{ vars.CURR_VERSION }}
+        body: |
+          ${{ vars.WHATS_NEW }}
+        draft: false
+        prerelease: false
+
+    - name: Upload ZIP Release Asset
+      id: upload-release-asset
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: rest-controller/target/InterviewQuiz.zip
+        asset_name: InterviewQuiz.zip
+        asset_content_type: application/zip
+
+    - name: Upload JAR Release Asset
+      id: upload-release-asset
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: rest-controller/target/InterviewQuiz.jar
+        asset_name: InterviewQuiz.jar
+        asset_content_type: application/jar
+
+    # Configure and create Docker container, push it to Docker Hub
 
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v3

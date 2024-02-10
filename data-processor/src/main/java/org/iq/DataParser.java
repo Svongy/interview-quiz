@@ -23,7 +23,15 @@ public class DataParser {
         try {
             MappingIterator<Question> questionsIterator =
                     csvMapper.readerFor(Question.class).with(csvSchema).readValues(RESULT_FILE_PATH);
-            questions = questionsIterator.readAll();
+
+            while (questionsIterator.hasNext()) {
+                Question currentQuestion = questionsIterator.next();
+                if (currentQuestion.isValid()) {
+                    questions.add(currentQuestion);
+                } else {
+                    log.warning("Invalid question encountered and skipped: " + currentQuestion);
+                }
+            }
         } catch (IOException e) {
             log.severe("Unable to parse questions from raw_data file. " + e.getMessage());
         }

@@ -1,6 +1,5 @@
 package org.iq.service;
 
-import org.iq.Question;
 import org.iq.quiz.QuizModel;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -35,30 +34,32 @@ public class WebController {
             model.addAttribute("topics", quizModel.getDistinctTopics());
             model.addAttribute("tags", quizModel.getDistinctTags());
             model.addAttribute("competencies", quizModel.getDistinctCompetencies());
-            model.addAttribute("limits", quizModel.getQuestionsLimit());
             return "build";
         }
     }
 
+    @GetMapping("/generateQuiz")
+    public String generateQuiz(@RequestParam(value = "topics", required = false) List<String> topics,
+                               @RequestParam(value = "tags", required = false) List<String> tags,
+                               @RequestParam(value = "competencies", required = false) List<String> competencies) {
+        quizModel.generateQuiz(topics, tags, competencies);
+        return "redirect:quiz";
+    }
+
     @GetMapping("/quiz")
-    public String quizPage(@RequestParam(value = "topics", required = false) List<String> topics,
-                           @RequestParam(value = "tags", required = false) List<String> tags,
-                           @RequestParam(value = "competencies", required = false) List<String> competencies,
-                           @RequestParam(value = "limit", required = false) String limit,
-                           Model model) {
+    public String quizPage(Model model) {
         if (!quizModel.isDataLoaded()) {
             return "index";
         }
 
-        List<Question> filteredQuestions = quizModel.generateQuiz(topics, tags, competencies, limit);
-
-        if (filteredQuestions.isEmpty()) {
+        if (quizModel.getReadyQuestions().isEmpty()) {
             model.addAttribute("errorHeader", "No questions found");
             model.addAttribute("errorMessage",
                     "To adjust your selection click \"Try again\" and consider changing Topics, Tags, or Competencies");
             return "error";
         } else {
-            model.addAttribute("questions", filteredQuestions);
+            model.addAttribute("questions", quizModel.getReadyQuestions());
+            model.addAttribute("limits", quizModel.getQuestionsLimit());
             return "quiz";
         }
     }

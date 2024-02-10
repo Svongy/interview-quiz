@@ -11,6 +11,8 @@
 
 .form-header {
     padding-left: 5px;
+    align-items: center;
+    display: flex;
 }
 
 .form-header input[type="checkbox"] {
@@ -20,8 +22,7 @@
 
 .form-header label {
     position: relative;
-    padding-left: 40px;
-    padding-right: 1em;
+    padding: 0 20px 0 40px;
     line-height: 2;
     cursor: pointer;
     color: black;
@@ -58,10 +59,39 @@
     transition: 0.25s all ease;
 }
 
+.input-search {
+    padding-left: 10px;
+    right: 0;
+}
+
+.input-search > input {
+    font-size: 15px;
+    color: black;
+    border-style: none;
+    border-bottom: 1px solid rgba(77, 97, 113, .8);
+    outline: none;
+    background-color: transparent;
+    width: 70px;
+    height: 15px;
+    padding: 5px;
+    transition: all .5s ease-in-out;
+}
+
+.input-search > input::placeholder {
+  color: black;
+  opacity: 1;
+}
+
+.input-search > input:focus,
+.input-search > input:not(:placeholder-shown) {
+    width: 150px;
+    transition: all 500ms cubic-bezier(0, 0.110, 0.35, 2);
+}
+
 ul.checkbox-tag {
     list-style: none;
     padding: 5px;
-    margin: 0 auto;
+    margin: 10px 0 auto;
 }
 ul.checkbox-tag li{
     display: inline;
@@ -72,7 +102,7 @@ ul.checkbox-tag li{
     border: 1px solid var(--tags-border);
     color: black;
     border-radius: 25px;
-    margin: 3px 0px;
+    margin: 3px 2px;
 }
 .checkbox-tag label {
     padding: 8px 12px;
@@ -127,7 +157,23 @@ ul.checkbox-tag li{
     font-weight: bold;
 }
 
-.limit-label {
-    font-size: 20px;
-    padding-left: 5px;
+.statistics {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    width: 25px;
+    height: 25px;
+    margin: 50px 25px;   
+    padding: 5px;
+    background: var(--color-4);
+    border-radius: 6px;
+    overflow: hidden;               /* ???? */
+    z-index: 10;                    /* ???? */
+    backdrop-filter: blur(15px);    /* ???? */
+    box-shadow: 5px 5px 30px rgba(0, 0, 0, 0.1);
+    transition: all 0.5s ease-out;
+}
+.statistics.expanded {
+    width: 200px;
+    height: 100px;
 }

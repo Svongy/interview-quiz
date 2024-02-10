@@ -16,32 +16,30 @@ import java.util.stream.Collectors;
 @Log
 @Getter
 public class QuizModel {
-    private List<Question> questions;
     private boolean isDataLoaded = false;
-    private final String[] questionsLimit = {"ALL", "1", "5", "10", "25"};
+    private List<Question> rawQuestions;
+    private List<Question> readyQuestions;
+    private final String[] questionsLimit = {"ALL", "1", "5", "10", "NEW"};
 
     public void loadData() {
         RawDataReader.getQuestionsDataSet();
     }
 
     public void generateQuestionsList() {
-        this.questions = DataParser.parseQuestions();
+        this.rawQuestions = DataParser.parseQuestions();
         this.isDataLoaded = true;
     }
 
-    public List<Question> generateQuiz(List<String> topics,
+    public void generateQuiz(List<String> topics,
                                        List<String> tags,
-                                       List<String> competencies,
-                                       String limit) {
+                                       List<String> competencies) {
         List<Question> topicsFiltered = filterByTopic(topics);
         List<Question> tagsFiltered = filterByTags(tags, topicsFiltered);
         List<Question> competencyFiltered = filterByCompetency(competencies, tagsFiltered);
 
         Collections.shuffle(competencyFiltered);
 
-        List<Question> limitedQuestions = limitQuestions(limit, competencyFiltered);
-
-        return limitedQuestions;
+        this.readyQuestions = competencyFiltered;
     }
 
     private List<Question> limitQuestions(String limit, List<Question> questions) {
@@ -60,7 +58,7 @@ public class QuizModel {
     }
 
     public List<String> getDistinctTopics() {
-        return questions.stream()
+        return rawQuestions.stream()
                 .map(Question::getTopic)
                 .distinct()
                 .sorted()
@@ -68,7 +66,7 @@ public class QuizModel {
     }
 
     public List<String> getDistinctTags() {
-        return questions.stream()
+        return rawQuestions.stream()
                 .flatMap(question -> question.getTags().stream())
                 .distinct()
                 .sorted()
@@ -76,7 +74,7 @@ public class QuizModel {
     }
 
     public List<Competency> getDistinctCompetencies() {
-        return questions.stream()
+        return rawQuestions.stream()
                 .map(Question::getCompetency)
                 .distinct()
                 .sorted()
@@ -115,12 +113,12 @@ public class QuizModel {
         List<Question> topicsFiltered = new ArrayList<>();
         if (topics != null) {
             for (String topic : topics) {
-               topicsFiltered.addAll(questions.stream()
+               topicsFiltered.addAll(rawQuestions.stream()
                        .filter(question -> question.getTopic().equals(topic))
                        .toList());
             }
         } else {
-            topicsFiltered.addAll(questions);
+            topicsFiltered.addAll(rawQuestions);
         }
         return topicsFiltered;
     }

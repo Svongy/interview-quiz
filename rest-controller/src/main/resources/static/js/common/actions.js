@@ -33,3 +33,63 @@ function checkAnswers(source) {
         }
     });
 }
+
+function filterQuestions(source, value) {
+    const buttons = document.querySelectorAll('.selected');
+    buttons.forEach(btn => btn.classList.remove('selected'));
+    source.classList.add('selected');
+
+    const questionsContainer = document.querySelector('.questions-container');
+    const questions = Array.from(document.querySelectorAll('.question'));
+
+    const shuffledQuestions = shuffleArray(questions);
+
+    shuffledQuestions.forEach((question, index) => {
+        const isNewQuestion = question.querySelector('.new-question-text') !== null;
+        let displayStyle = 'none';
+
+        if (value === 'NEW') {
+            displayStyle = isNewQuestion ? 'inherit' : 'none';
+        } else if (value === 'ALL') {
+            displayStyle = 'inherit';
+        } else {
+            const questionsNumber = parseInt(value);
+            displayStyle = index < questionsNumber ? 'inherit' : 'none';
+        }
+
+        question.style.display = displayStyle;
+        questionsContainer.appendChild(question);
+    });
+}
+
+function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+}
+
+function toggleStatisticBox() {
+    var statisticBox = document.querySelector(".statistics");
+    statisticBox.classList.toggle("expanded");
+}
+
+function filterQuestionAttribures(source) {
+    var filterValue = source.value.toLowerCase();
+    var containerId = source.id;
+    var checkboxes = document.querySelectorAll(`input[name="${containerId}"]`);
+
+    checkboxes.forEach(function (checkbox) {
+        var checkboxValue = checkbox.value.toLowerCase();
+        var checkboxLabel = checkbox.parentElement;
+
+    checkboxLabel.style.display = checkboxValue.includes(filterValue) ? 'inline' : 'none';
+        
+    });
+}
+
+function clearQuestionAttributesFilter(source) {
+    source.value = '';
+    filterQuestionAttribures(source);
+}

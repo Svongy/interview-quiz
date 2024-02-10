@@ -2,10 +2,7 @@ package org.iq;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 import lombok.extern.java.Log;
 import org.iq.enums.Competency;
 import org.iq.enums.QuestionType;
@@ -39,7 +36,7 @@ Your csv should have at least following headers:
 public class Question {
     private QuestionType type = QuestionType.TEXT;
     private String question;
-    private String topic = "N/A - ERROR IN DATASET";
+    private String topic;
     private List<String> tags = new ArrayList<>();
     private Competency competency = Competency.Junior;
     private String a;
@@ -59,7 +56,7 @@ public class Question {
     }};
 
     public void setType(String type) {
-        this.type = QuestionType.valueOf(type);
+        this.type = QuestionType.fromString(type);
     }
 
     public void setCompetency(String competency) {
@@ -116,8 +113,10 @@ public class Question {
     private String setHtmlMarkup(String text) {
         String result = text;
 
-        for (String tag : replacementList.keySet()) {
-            result = result.replace(tag, replacementList.get(tag));
+        if (result != null) {
+            for (String tag : replacementList.keySet()) {
+                result = result.replace(tag, replacementList.get(tag));
+            }
         }
 
         return result;
@@ -133,5 +132,14 @@ public class Question {
             return daysBetween <= 30;
         }
         return false;
+    }
+
+    public boolean isValid() {
+        if (this.question == null | this.answer == null | this.topic == null) {
+            return false;
+        } else if (QuestionType.SINGLE.equals(this.type) | QuestionType.MULTI.equals(this.type)) {
+            return !(a == null);
+        }
+        return true;
     }
 }

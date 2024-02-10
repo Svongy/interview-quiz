@@ -21,7 +21,7 @@
     --step-border: var(--color-4);
 
     --button: var(--color-3);
-    --button-hover-text: var(--white);
+    --button-hover-text: var(--color-0);
 }
 
 body {
@@ -48,10 +48,9 @@ body {
 }
 
 .logo {
-    width: 350px;
+    width: 200px;
     height: 75px;
     margin: 10px;
-    box-shadow: 3px 3px 10px rgba(70, 109, 127, 0.5);
 }
 
 .steps {
@@ -89,14 +88,10 @@ body {
     color: var(--step-border);
 }
 
-.buttons {
-    width: 350px;
+.header-buttons {
+    width: 200px;
     display: flex;
     justify-content: flex-end;
-}
-
-.button {
-    margin: 5px;
 }
 
 .page-container {
@@ -147,7 +142,7 @@ body {
 
 h1 {
     margin: auto;
-    padding: 10px 10px;
+    padding: 10px 10px 25px;
     text-align: center;
 }
 
@@ -155,11 +150,24 @@ input {
     vertical-align: middle; 
 }
 
+button:disabled{
+    pointer-events: none;
+    cursor: not-allowed;
+    opacity: 0.20;
+}
+
+button:hover{
+    color: var(--button-hover-text);
+    background-color: var(--button);
+}
+
 button {
     display: inline-block;
     outline: none;
     cursor: pointer;
     font-size: 14px;
+    padding: 16px 14px 18px;
+    margin: 5px;
     line-height: 1;
     border-radius: 500px;
     transition-property: background-color,border-color,color,box-shadow,filter;
@@ -171,21 +179,9 @@ button {
     white-space: normal;
     font-weight: 700;
     text-align: center;
-    padding: 16px 14px 18px;
     color: var(--button);
     box-shadow: inset 0 0 0 2px var(--button);
     background-color: transparent;
     height: 48px;
-}
-
-button:hover{
-    color: var(--button-hover-text);
-    background-color: var(--button);
-}
-
-button:disabled{
-    pointer-events: none;
-    cursor: not-allowed;
-    opacity: 0.20;
 }
 
