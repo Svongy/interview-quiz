@@ -60,32 +60,60 @@
 }
 
 .input-search {
-    padding-left: 10px;
-    right: 0;
+    padding: 10px 20px;
+    display: inline-block;
+    position: relative;
 }
 
 .input-search > input {
-    font-size: 15px;
+    font-size: 18px;
     color: black;
     border-style: none;
     border-bottom: 1px solid rgba(77, 97, 113, .8);
     outline: none;
     background-color: transparent;
-    width: 70px;
+    width: 100px;
     height: 15px;
     padding: 5px;
     transition: all .5s ease-in-out;
+    position: relative;
 }
 
 .input-search > input::placeholder {
-  color: black;
-  opacity: 1;
+    color: rgba(0, 0, 0, .8);
 }
 
 .input-search > input:focus,
 .input-search > input:not(:placeholder-shown) {
-    width: 150px;
+    width: 200px;
     transition: all 500ms cubic-bezier(0, 0.110, 0.35, 2);
+}
+
+.clear-search-button {
+    font-size: 18px;
+    position: absolute; 
+    top: 50%;
+    right: 5px;
+    transform: translateY(-50%);
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    margin-left: 5px;
+}
+
+.clear-search-button::after {
+    content: "";
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: calc(100% + 2px);
+    height: 1px;
+    background-color: rgba(77, 97, 113, .8);
+}
+
+.input-search > input:focus + .clear-search-button,
+.input-search > input:not(:placeholder-shown) + .clear-search-button {
+    opacity: 1;
 }
 
 ul.checkbox-tag {

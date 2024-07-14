@@ -2,10 +2,15 @@ package org.iq;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import lombok.*;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 import lombok.extern.java.Log;
 import org.iq.enums.Competency;
 import org.iq.enums.QuestionType;
+import org.iq.utils.QuestionDeserializer;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -24,7 +29,10 @@ Your csv should have at least following headers:
 ** competency - the level of expertise or knowledge needed to respond to the question: Junior, Middle or Senior;
 ** a,b,c,d - possible answer options for questions with types SINGLE or MULTI. \
     A minimum of two options is necessary for functionality, though including all four is recommended for an enhanced user experience;
-** answer - contains plain text for TEXT questions or letters a); b); c); d) (separated by semicolons) for SINGLE or MULTI.
+** answer - contains plain text for TEXT questions or letters a); b); c); d) (separated by semicolons) for SINGLE or MULTI;
+** date - the date when question was added or last modified;
+** seenOnInterview - whether the particular question was asked on interview;
+** disclaimer - contains some useful for end-user information based on specific condition.
 */
 
 @Log
@@ -33,6 +41,7 @@ Your csv should have at least following headers:
 @ToString
 @NoArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
+// @JsonDeserialize(using = QuestionDeserializer.class) TODO: postponed for the next release
 public class Question {
     private QuestionType type = QuestionType.TEXT;
     private String question;
@@ -45,6 +54,8 @@ public class Question {
     private String d;
     private String answer;
     private LocalDate date;
+    private boolean seen = false;
+    private String disclaimer;
 
     @JsonIgnore
     private static final Map<String, String> replacementList = new HashMap<>() {{
@@ -93,6 +104,10 @@ public class Question {
         }
     }
 
+    public void setTags(List<String> tags) {
+        this.tags.addAll(tags);
+    }
+
     public void setQuestion(String question) {
         this.question = setHtmlMarkup(question);
     }
@@ -104,9 +119,27 @@ public class Question {
     }
 
     public void setDate(String date) {
-        if (date != null) {
+        if (date != null && !date.isEmpty()) {
             DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
             this.date = LocalDate.parse(date, dtf);
+        }
+    }
+
+    public void setSeen(String seen) {
+        if (seen.equalsIgnoreCase("True")) {
+            this.seen = true;
+        }
+    }
+
+    public void setDisclaimer() {
+        if (QuestionType.CODE.equals(this.type)) {
+            this.disclaimer = "Please note that this is a CODE question, and a direct answer is not provided. " +
+                    "This is because there are often multiple solutions to a coding problem, and the focus " +
+                    "is on providing guidance and advice rather than a single correct answer.";
+        } else if (this.topic.equalsIgnoreCase("Behavioral")) {
+            this.disclaimer = "Please note that this is a Behavioral question, and a direct answer is not provided. " +
+                    "This is because responses may vary based on individual experiences and perspectives and the focus " +
+                    "is on providing guidance and advice rather than a predetermined response.";
         }
     }
 

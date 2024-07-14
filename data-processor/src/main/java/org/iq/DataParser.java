@@ -2,8 +2,9 @@ package org.iq;
 
 import com.fasterxml.jackson.databind.MappingIterator;
 import com.fasterxml.jackson.dataformat.csv.CsvMapper;
+import com.fasterxml.jackson.dataformat.csv.CsvParser;
 import com.fasterxml.jackson.dataformat.csv.CsvSchema;
-import lombok.extern.java.Log;
+import lombok.extern.log4j.Log4j2;
 import org.iq.utils.ConfigReader;
 
 import java.io.File;
@@ -11,7 +12,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-@Log
+@Log4j2
 public class DataParser {
     private static final File RESULT_FILE_PATH = new File(ConfigReader.readProperty("OUT_FILE_PATH"));
     private static final CsvMapper csvMapper = new CsvMapper();
@@ -29,11 +30,11 @@ public class DataParser {
                 if (currentQuestion.isValid()) {
                     questions.add(currentQuestion);
                 } else {
-                    log.warning("Invalid question encountered and skipped: " + currentQuestion);
+                    log.warn("Invalid question encountered and skipped: " + currentQuestion);
                 }
             }
         } catch (IOException e) {
-            log.severe("Unable to parse questions from raw_data file. " + e.getMessage());
+            log.error("Unable to parse questions from 'raw_data' file. " + e.getMessage());
         }
 
         return questions;

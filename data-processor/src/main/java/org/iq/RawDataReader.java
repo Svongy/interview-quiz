@@ -1,6 +1,7 @@
 package org.iq;
 
 import lombok.extern.java.Log;
+import lombok.extern.log4j.Log4j2;
 import org.iq.utils.ConfigReader;
 
 import java.io.*;
@@ -15,7 +16,7 @@ In order to specify your own sheet ID refer to a 'resources/application.properti
 ** EXPORT_FORMAT - supported csv (TODO: json)
 ** OUT_FILE_PATH - with your desired out file location
  */
-@Log
+@Log4j2
 public class RawDataReader {
     private static final String G_SHEET_URL = ConfigReader.readProperty("GOOGLE_SHEET_URL");
     private static final StringBuilder GET_DATA_RESPONSE = new StringBuilder();
@@ -28,7 +29,7 @@ public class RawDataReader {
                 fetchData();
                 saveData();
             } catch (IOException e) {
-                log.severe("Exception occurred while retrieving or saving questions data with a message " +
+                log.error("Exception occurred while retrieving or saving questions data with a message: {}",
                         e.getMessage());
             }
         } else {
@@ -51,7 +52,7 @@ public class RawDataReader {
             }
             reader.close();
         } else {
-            log.severe("Failed to fetch data. Response code: " + responseCode);
+            log.error("Failed to fetch data. Response code: {}", responseCode);
         }
     }
 

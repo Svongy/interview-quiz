@@ -1,8 +1,8 @@
 package org.iq.enums;
 
-import lombok.extern.java.Log;
+import lombok.extern.log4j.Log4j2;
 
-@Log
+@Log4j2
 public enum Competency {
     Junior,
     Middle,
@@ -14,7 +14,7 @@ public enum Competency {
                 return val;
             }
         }
-        log.severe("Unable to parse competency from string: " + value + " default Junior competency will be used.");
+        log.warn("Unable to parse competency from string: '{}'. Default Junior competency will be used.", value);
         return Competency.Junior;
     }
 }

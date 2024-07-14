@@ -44,12 +44,15 @@ function filterQuestions(source, value) {
 
     const shuffledQuestions = shuffleArray(questions);
 
-    shuffledQuestions.forEach((question, index) => {
-        const isNewQuestion = question.querySelector('.new-question-text') !== null;
+    shuffledQuestions.forEach((question, index) => {        
         let displayStyle = 'none';
 
         if (value === 'NEW') {
+            const isNewQuestion = question.querySelector('.new-question-text') !== null;
             displayStyle = isNewQuestion ? 'inherit' : 'none';
+        } else if (value === 'SEEN ON INTERVIEW') {
+            const seenOnInterviewQuestion = question.querySelector('span[data-seen-value="true"]') !== null;
+            displayStyle = seenOnInterviewQuestion ? 'inherit' : 'none';
         } else if (value === 'ALL') {
             displayStyle = 'inherit';
         } else {
@@ -77,19 +80,27 @@ function toggleStatisticBox() {
 
 function filterQuestionAttribures(source) {
     var filterValue = source.value.toLowerCase();
-    var containerId = source.id;
-    var checkboxes = document.querySelectorAll(`input[name="${containerId}"]`);
+    var checkboxes = document.querySelectorAll(`.checkbox-tag input`);
 
     checkboxes.forEach(function (checkbox) {
         var checkboxValue = checkbox.value.toLowerCase();
         var checkboxLabel = checkbox.parentElement;
 
-    checkboxLabel.style.display = checkboxValue.includes(filterValue) ? 'inline' : 'none';
-        
+        checkboxLabel.style.display = checkboxValue.includes(filterValue) ? 'inline' : 'none';    
     });
 }
 
-function clearQuestionAttributesFilter(source) {
-    source.value = '';
-    filterQuestionAttribures(source);
+function clearSearch() {
+    var searchField = document.getElementById('input-search'); 
+    searchField.value = '';
+    filterQuestionAttribures(searchField);
+}
+
+if (window.location.pathname.includes('/build')) {
+    document.addEventListener('keydown', function(event) {
+    // handle 'Esc' button press
+        if (event.keyCode === 27) { 
+            clearSearch();
+        }
+    });
 }

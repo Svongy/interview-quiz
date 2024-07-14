@@ -12,10 +12,13 @@ public class ConfigReader {
         loadPropertiesFile();
 
         String property = properties.getProperty(key);
-        String indent = "$";
-        for (String propertyKey : properties.stringPropertyNames()) {
-            if (property.contains(indent + propertyKey)) {
-                property = property.replace(indent + propertyKey, properties.getProperty(propertyKey));
+
+        if (property != null) {
+            String indent = "$";
+            for (String propertyKey : properties.stringPropertyNames()) {
+                if (property.contains(indent + propertyKey)) {
+                    property = property.replace(indent + propertyKey, properties.getProperty(propertyKey));
+                }
             }
         }
 

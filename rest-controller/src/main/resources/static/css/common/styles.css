@@ -8,6 +8,7 @@
     --light-green: #90EE90;
     --light-pink: #FFB6C1;
     --light-gray: #DBE0E1;
+    --grayy-for-50-brightness: #787878;
     --green: #008000;
     --red: #FF0000;
     --white: #FFFFFF;
@@ -56,8 +57,7 @@ body {
 .steps {
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    position: 2;    
+    align-items: center;  
 }
 .step {
     margin: 25px;
@@ -96,13 +96,13 @@ body {
 
 .page-container {
     width: 1000px;
-    min-width: 800px;
-    margin: 100px auto 25px auto;
+    min-width: 1000px;
+    margin: 100px auto;
 }
 
 .form-container {
     padding: 5px;
-    margin: 5px 10px;
+    margin: 20px;
     border-radius: 10px;
     box-shadow: 3px 3px 10px rgba(70, 109, 127, 0.2);
 }
@@ -124,25 +124,12 @@ body {
     padding: 3px 0;
     width: 100%;
     font-size: 14px;
-    margin-top: 100px;
     box-shadow: 3px 0 10px rgba(70, 109, 127, 0.2);
-}
-
-@media screen and (max-width: 600px) {
-    body {
-        flex-direction: column;
-    }
-
-    .page-container {
-        max-width: 100%;
-        margin-left: 0px;
-        justify-content: flex-start;
-    }
 }
 
 h1 {
     margin: auto;
-    padding: 10px 10px 25px;
+    padding: 10px 15px;
     text-align: center;
 }
 
@@ -184,4 +171,3 @@ button {
     background-color: transparent;
     height: 48px;
 }
-

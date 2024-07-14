@@ -39,13 +39,15 @@
         </div>
         <h1>Select Topics, Tags, and Competencies you want to master</h1>
 
+        <div class="input-search">
+            <input id="input-search" type="text" placeholder="Search" oninput="filterQuestionAttribures(this)">
+            <span class="clear-search-button" onclick="clearSearch()" aria-hidden="true">&#x2715;</span>
+        </div>
+
         <div class="form-container">
             <div class="form-header">
                 <input type="checkbox" id="topics-header" th:onclick="checkUncheckAll(this, 'topics')">
                 <label for="topics-header">Topics</label>
-                <div class="input-search">
-                    <input type="text" id="topics" placeholder="Search . . ." oninput="filterQuestionAttribures(this)" onblur="clearQuestionAttributesFilter(this)">
-                </div>
             </div>
 
             <ul class="checkbox-tag">
@@ -60,9 +62,6 @@
             <div class="form-header">
                 <input type="checkbox" id="tags-header" th:onclick="checkUncheckAll(this, 'tags')">
                 <label for="tags-header">Tags</label>
-                <div class="input-search">
-                    <input type="text" id="tags" placeholder="Search . . ." oninput="filterQuestionAttribures(this)" onblur="clearQuestionAttributesFilter(this)">
-                </div>
             </div>
 
             <ul class="checkbox-tag">
@@ -77,9 +76,6 @@
             <div class="form-header">
                 <input type="checkbox" id="competencies-header" th:onclick="checkUncheckAll(this, 'competencies')">
                 <label for="competencies-header">Competencies</label>
-                <div class="input-search">
-                    <input type="text" id="competencies" placeholder="Search . . ." oninput="filterQuestionAttribures(this)" onblur="clearQuestionAttributesFilter(this)">
-                </div>
             </div>
 
             <ul class="checkbox-tag">

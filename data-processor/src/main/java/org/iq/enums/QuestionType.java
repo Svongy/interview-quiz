@@ -1,8 +1,8 @@
 package org.iq.enums;
 
-import lombok.extern.java.Log;
+import lombok.extern.log4j.Log4j2;
 
-@Log
+@Log4j2
 public enum QuestionType {
     TEXT,
     CODE,
@@ -15,7 +15,7 @@ public enum QuestionType {
                 return val;
             }
         }
-        log.severe("Unable to parse question type from string: " + value + " default TEXT type will be used.");
+        log.warn("Unable to parse competency from string: '{}'. Default TEXT type will be used.", value);
         return QuestionType.TEXT;
     }
 }

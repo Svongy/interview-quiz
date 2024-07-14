@@ -80,13 +80,18 @@
                             <span class="bold">Competency: </span>
                             <span th:text="${question.competency}"></span>
                         </div>
+
+                        <div class="details-column-row">
+                            <span class="bold">Seen on interview: </span>
+                            <span th:data-seen-value="${question.seen}" th:text="${question.seen}"></span>
+                        </div>
                     </div>
                 </div>
 
                 <div class="options-container" th:if="${#strings.equals(question.type, 'SINGLE') || #strings.equals(question.type, 'MULTI')}">
                     <fieldset>
                         <legend>
-                            <span class="bold" th:text="${question.type == 'SINGLE' ? 'Choose one' : 'Choose multiple'}"></span>
+                            <span class="bold" th:text="${#strings.equals(question.type, 'SINGLE') ? 'Choose one' : 'Choose multiple'}"></span>
                         </legend>
 
                         <div th:if="${question.a != null}">

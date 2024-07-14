@@ -19,7 +19,7 @@
     position: sticky;
     top: 95px;
     margin: auto;
-    padding: 25px;
+    padding: 15px 10px;
     text-align: center;
     background-color: var(--color-0);
 }
@@ -44,9 +44,12 @@ button.selected {
 .separator-line {
     height: 1px;
     background: var(--color-4);
-    margin: 25px auto 0;
+    margin: 10px auto 0;
     width: 600px;
+}
 
+.question {
+    
 }
 
 .question-number-container {
@@ -103,10 +106,15 @@ button.selected {
     box-shadow: 0 2px 10px rgba(70, 109, 127, 0.2);
 }
 
+.options-container input {
+    cursor: pointer;
+}
+
 .answer-container {
     padding: 5px 10px 10px;
     background-color: var(--questions-answer-bg);
     box-shadow: 0 2px 10px rgba(70, 109, 127, 0.2);
+    cursor: pointer;
 }
 
 .answer-text {
